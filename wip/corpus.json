@@ -1,0 +1,59 @@
+{
+ "country": {
+  "code": "AE",
+  "name": "United Arab Emirates",
+  "slug": "united-arab-emirates",
+  "lang": "ar",
+  "tz": "Asia/Dubai",
+  "future_branch": "future",
+  "publisher": {
+   "name": "UAE Legislation (uaelegislation.gov.ae), UAE Cabinet",
+   "email": "publisher@uaelegislation.invalid"
+  },
+  "default_in_force_rule": {
+   "text": "Constitution art. 111: federal laws are published in the Official Gazette within two weeks of signature and come into force one month after publication unless the law provides otherwise. Each act's own in-force clause overrides this.",
+   "source": "https://uaelegislation.gov.ae/ar/legislations/1000"
+  },
+  "licence_note": "Text: UAE Legislation platform (uaelegislation.gov.ae), UAE Cabinet; read from Internet Archive captures. In case of conflict the Arabic text prevails."
+ },
+ "sources": [
+  {
+   "name": "UAE Legislation, Arabic act page for the Constitution (id 1000), Internet Archive capture 20250529114023",
+   "url": "https://web.archive.org/web/20250529114023id_/https://uaelegislation.gov.ae/ar/legislations/1000/",
+   "retrieved": "2026-10-28",
+   "requests": 1,
+   "licence": "Official text of the UAE federal government; no reuse licence stated on the site.",
+   "notes": "The live site answers this machine with a Cloudflare challenge (403), so only archive.org id_ captures are read."
+  }
+ ],
+ "laws": {},
+ "acts": [
+  {
+   "slug": "constitution",
+   "short": "الدستور",
+   "title": "دستور دولة الإمارات العربية المتحدة",
+   "url": "https://uaelegislation.gov.ae/ar/legislations/1000",
+   "first_law": null,
+   "earlier_laws": [],
+   "versions": [
+    {
+     "from": "2023-03-29",
+     "source_url": "https://web.archive.org/web/20250529114023id_/https://uaelegislation.gov.ae/ar/legislations/1000/",
+     "sha256": "9de9e9a09732462550b0d92983eec93d051126aae33de578f316432ceaa209ee",
+     "units": {},
+     "credits": {},
+     "note": "Consolidated Arabic text as published by uaelegislation.gov.ae, which states it is current to its last update of 29 March 2023. Earlier wordings are not yet added."
+    }
+   ]
+  }
+ ],
+ "applies": [],
+ "decisions": [
+  "Interim build: the Constitution is one \"oldest version available\" version (first_law null), dated 2023-03-29, the date the publisher gives for its last update, and credited to the publisher.",
+  "Arabic is the authoritative text and is what is built; the English version on the same site is a reference only.",
+  "Part and chapter headings are not yet kept as units; the preamble (loaded by the site via ajax) is not yet included."
+ ],
+ "ai_use": [
+  "none: no model wrote, summarised or corrected any legal text; parsing is rule-based (parse.py)."
+ ]
+}
