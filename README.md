@@ -1,31 +1,82 @@
 # United Arab Emirates: law history in git
 
+The law of the United Arab Emirates as a git history: one file per article, one commit per version on the day it took effect, and the law that made each change as the commit's author. `git blame` names the law behind every line; `git log` lists every change to an article; picking a date gives the text in force that day.
+
 Part of [lexifina/global-law](https://github.com/lexifina/global-law), one git history for every country's law: this is the United Arab Emirates' national law, which global-law reads at `united-arab-emirates/national/acts/`.
 
-The law of United Arab Emirates as a git history: one file per provision, one commit per law on the day it took effect, and the law that made each change as the commit's author. `git blame` names the law behind every paragraph; `git log` lists every change; picking a date gives the text in force that day.
+**What is in it now:** one act, the Constitution of the United Arab Emirates (دستور دولة الإمارات العربية المتحدة), with its 152 articles in one version: the current text on the federal legislation portal, dated by the portal's last update of 29 March 2023. Its earlier wordings are not yet here, and no other law is. [`constitution/README.md`](constitution/README.md) lists every article; [`REPRODUCE.md`](REPRODUCE.md) says how the history was built.
 
-It follows the shared design of [lexifina/global-law](https://github.com/lexifina/global-law).
+The Constitution is in `constitution/`, one file per article (`constitution/art-030.md` is Article 30, on freedom of opinion and expression).
 
-**What is in it now (a first build, not complete)**
+The text is in Arabic, which is authoritative, as the portal publishes it. The portal's English version is not used, and an English translation is not part of this record.
 
-| Folder | Act | Versions | History |
-| --- | --- | ---: | --- |
-| `constitution/` | دستور دولة الإمارات العربية المتحدة (Constitution of the United Arab Emirates) | 1 | One version: the text on the UAE Legislation portal, whose last-update date is 29 March 2023. No earlier versions are online. |
+## Questions as git commands
 
-**Language.** Arabic, the authoritative text. The English version on the same portal is not used. This README is in English.
+| Question | Command |
+| --- | --- |
+| Every change to Article 30 of the Constitution | `git log -p --word-diff -- constitution/art-030.md` |
+| Which law wrote each line of Article 30? | `git blame constitution/art-030.md` |
+| Every version of the Constitution, with the day each took effect | `git log --format="%h %(trailers:key=In-force,valueonly,separator=) %an" -- constitution ":^constitution/README.md"` |
+| Article 30 as in force on 1 January 2026 | `python tools/on.py 2026-01-01 constitution art-030` |
+
+**Outside git**, we also host this record publicly, for free:
+
+- **[Ask Claude about Emirati law](https://global-law.lexifina.com/v1/try_claude?country=united-arab-emirates)**: opens Claude with a first question ready.
+- **[Ask ChatGPT](https://global-law.lexifina.com/v1/try_chatgpt?country=united-arab-emirates)**: the same question in ChatGPT.
+- **[Call the API in your browser](https://global-law.lexifina.com/v1/search_law?query=%D8%AD%D8%B1%D9%8A%D8%A9+%D8%A7%D9%84%D8%B1%D8%A3%D9%8A&jurisdictions=united-arab-emirates)**: a search of Emirati law for "حرية الرأي" (freedom of opinion), returned as JSON. See the [documentation here](https://lexifina.com/api/global-law).
+
+Both assistants read the record through the free Global law connector (MCP, `https://global-law.lexifina.com/mcp`); the first time, the chat gives you the link that adds it. Ask in Arabic or in English.
+
+**Host it yourself easily.** All it takes is git and Python, and the tools run on your machine:
+
+```sh
+git clone --depth 1 https://github.com/lexifina/global-law && cd global-law
+python3 tools/countries.py add united-arab-emirates/national/acts
+python3 tools/law.py show 2026-01-01 united-arab-emirates/national/acts/constitution/art-030.md
+```
+
+Opened in Claude Code, Cursor, VS Code or Codex, the clone also starts a local MCP server with the same tools ([MCP.md](https://github.com/lexifina/global-law/blob/main/MCP.md)).
 
 ## Dates
 
-The Constitution has no earlier version online, so its single commit is "oldest version available", dated by the portal's own last-update date (29 March 2023) and credited to the publisher.
+Each commit is dated at noon, Asia/Dubai, on the day the version took effect, and carries it in its `In-force:` trailer:
+
+- The one version is dated 29 March 2023, the day the portal gives for its last update of the text, not a day taken from an amending law; earlier days show nothing.
+- Laws added later are dated by their own in-force clause or, without one, one month after their publication in the Official Gazette (Constitution, art. 111).
+
+The version is the "oldest version available", credited to the publisher, UAE Legislation (uaelegislation.gov.ae), UAE Cabinet, with an address that cannot exist (`publisher@uaelegislation.invalid`), not to a law. The committer is Lexifina.
 
 ## How it is checked
 
-Every version is read back from git on the day it took effect and on the day before (`tools/check_repo.py`) and must match `corpus.json`; results are in `REPRODUCE.md`.
+- `tools/check_repo.py` reads every version back from git on the day it took effect and on the day before and compares it with the corpus; it also requires every commit's trailers to parse, no merge commits on `main`, commit dates that never go backwards and nothing dated in the future. `REPRODUCE.md` records that it was not run for this build.
+- `tools/build.py` gives the same commit hashes from the same corpus; no second build has been compared yet.
+- The text is not yet compared with a second official copy, such as the portal's Arabic PDF.
 
-## What "author" means
+## What it does not show
 
-The author of a commit is the law that made the change, with an e-mail address that cannot exist (`<law key>@uaelegislation.gov.ae.invalid`). For this single version the author is the publisher. The committer is always Lexifina.
+- **The Constitution's history.** It was issued in 1971 and has been amended since; its earlier wordings, and the amendments that made each change, are not yet commits.
+- **Headings and the preamble.** Part and chapter headings are not files, and the preamble, which the portal publishes separately, is not included.
+- **Other legislation.** Federal laws and decree-laws, Cabinet resolutions, treaties and case law are not here.
 
-## Limits
+## Sources
 
-Only the current text is held, so there is no amendment history. Articles 1 to 152 are included; part and chapter headings are not kept, and the preamble (which the portal loads separately) is not included.
+| Source | Kind | Past versions | Notes |
+| --- | --- | --- | --- |
+| [UAE Legislation](https://uaelegislation.gov.ae) (UAE Cabinet) | Federal government legislation portal | only the current text is used | The Arabic page of the Constitution (legislation 1000), read from an [Internet Archive copy of 29 May 2025](https://web.archive.org/web/20250529114023/https://uaelegislation.gov.ae/ar/legislations/1000/) |
+
+## Licence
+
+See [`LICENSE`](LICENSE). Federal Decree-Law No. 38 of 2021 on Copyright and Neighbouring Rights, Article 3(2), removes protection from official documents such as the texts of laws, regulations and resolutions; the text is published on that basis. Lexifina's history, commit messages, tables and tools are CC0 1.0.
+
+No AI model wrote, translated or corrected legal text, and none runs when the history is built; the scripts were written by an AI model (see [`REPRODUCE.md`](REPRODUCE.md)).
+
+## More
+
+From [lexifina/global-law](https://github.com/lexifina/global-law):
+
+- [FEATURES.md](https://github.com/lexifina/global-law/blob/main/FEATURES.md): every feature, and what every corpus must support (`git blame`, `law.py`, the MCP tools)
+- [FAQ.md](https://github.com/lexifina/global-law/blob/main/FAQ.md): questions and answers · [CONTRIBUTING.md](https://github.com/lexifina/global-law/blob/main/CONTRIBUTING.md): proposing changes · [MCP.md](https://github.com/lexifina/global-law/blob/main/MCP.md): the MCP server · [REPRODUCE.md](https://github.com/lexifina/global-law/blob/main/REPRODUCE.md): how it was built · [CHANGELOG.md](https://github.com/lexifina/global-law/blob/main/CHANGELOG.md)
+- [FRESHNESS.md](https://github.com/lexifina/global-law/blob/main/FRESHNESS.md): how current each corpus is · [Monitoring](https://github.com/lexifina/global-law/tree/main/monitoring): whether updates are running · [WATCHING.md](https://github.com/lexifina/global-law/blob/main/WATCHING.md): how each official source is watched for changes
+- [performance/](https://github.com/lexifina/global-law/tree/main/performance): how fast the tools are, measured
+- [visualisations/](https://github.com/lexifina/global-law/tree/main/visualisations): charts and bridges across the world's law
+- [Vulnerabilities](https://github.com/lexifina/global-law/tree/main/vulnerabilities): mistakes in legislation as published
