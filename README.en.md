@@ -59,6 +59,7 @@ The version is the "oldest version available", credited to the publisher, UAE Le
 - `tools/check_repo.py` reads every version back from git on the day it took effect and on the day before and compares it with the corpus; it also requires every commit's trailers to parse, no merge commits on `main`, commit dates that never go backwards and nothing dated in the future. `REPRODUCE.md` records that it was not run for this build.
 - `tools/build.py` gives the same commit hashes from the same corpus; no second build has been compared yet.
 - The text is not yet compared with a second official copy, such as the portal's Arabic PDF.
+- [vulnerabilities/](vulnerabilities/README.en.md): possible drafting mistakes in this law, found by global-law's detectors and checked by hand. Not run yet.
 
 ## What it does not show
 
@@ -77,6 +78,10 @@ The version is the "oldest version available", credited to the publisher, UAE Le
 See [`LICENSE`](LICENSE). Federal Decree-Law No. 38 of 2021 on Copyright and Neighbouring Rights, Article 3(2), removes protection from official documents such as the texts of laws, regulations and resolutions; the text is published on that basis. Lexifina's history, commit messages, tables and tools are CC0 1.0.
 
 No AI model wrote, translated or corrected legal text, and none runs when the history is built; the scripts were written by an AI model (see [`REPRODUCE.md`](REPRODUCE.md)).
+
+## Visualisations
+
+- [visualisations/](visualisations/README.en.md): charts drawn from this repository. Not drawn yet.
 
 ## More
 
