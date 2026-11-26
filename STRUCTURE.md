@@ -9,6 +9,7 @@ dated 12:00 UAE time on the day it took effect. Emirate law (Dubai, Abu Dhabi, .
 | `القوانين-الاتحادية/` | federal laws (قانون اتحادي) | `القوانين-الاتحادية/<السنة>/<رقم>.md` |
 | `المراسيم-بقوانين-اتحادية/` | federal decree-laws (مرسوم بقانون اتحادي) | `المراسيم-بقوانين-اتحادية/<السنة>/<رقم>.md` |
 | `قرارات-مجلس-الوزراء/` | Cabinet decisions and implementing regulations | `قرارات-مجلس-الوزراء/<السنة>/<رقم>.md` |
+| `أنظمة-المصرف-المركزي/` | regulations, standards and other instruments of the Central Bank of the UAE in force, as its rulebook (rulebook.centralbank.ae) publishes them in Arabic | `أنظمة-المصرف-المركزي/<العنوان>.md` |
 | `data/`, `tools/`, `visualisations/`, `vulnerabilities/` | tables, scripts and reports about the record | |
 
 A law is one file, holding its text as the source last showed it, with its amendments listed in the header. The
@@ -19,3 +20,5 @@ Every commit carries `Kind:`, `In-force:` and `In-force-basis:` (the clause that
 day cannot be read is not committed.
 
 Until 2026-11-26 the Constitution was in `constitution/`; the folder was renamed in one commit (`data/paths.json`).
+
+Next to an act's Arabic file, `<رقم>.en.md` holds the English text the portal publishes for it (an official translation; the Arabic text prevails), with the same day.
