@@ -11,11 +11,11 @@ The law of the United Arab Emirates as a git history: one file per article, one 
 
 Part of [lexifina/global-law](https://github.com/lexifina/global-law), one git history for every country's law: this is the United Arab Emirates' national law, which global-law reads at `united-arab-emirates/national/acts/`.
 
-**What is in it now:** one act, the Constitution of the United Arab Emirates (دستور دولة الإمارات العربية المتحدة), with its 152 articles in one version: the current text on the federal legislation portal, dated by the portal's last update of 29 March 2023. Its earlier wordings are not yet here, and no other law is. [`constitution/README.md`](constitution/README.md) lists every article; [`REPRODUCE.md`](REPRODUCE.md) says how the history was built.
+**What is in it now:** the Constitution (152 articles, one version); 30 federal laws, 54 federal decree-laws and 128 Cabinet decisions from the federal legislation portal, each as the portal last showed it (85 also with the portal's English text); and 109 regulations, standards and other instruments of the Central Bank's rulebook. The main codes and case law are not here yet. [`STRUCTURE.md`](STRUCTURE.md) sets out the folders; [`REPRODUCE.md`](REPRODUCE.md) says how the history was built.
 
-The Constitution is in `constitution/`, one file per article (`constitution/art-030.md` is Article 30, on freedom of opinion and expression).
+The Constitution is in `الدستور/`, one file per article (`الدستور/art-030.md` is Article 30, on freedom of opinion and expression); a law is one file, `<folder>/<year>/<number>.md`.
 
-The text is in Arabic, which is authoritative, as the portal publishes it. The portal's English version is not used, and an English translation is not part of this record.
+The text is in Arabic, which is authoritative, as the portal publishes it. Where the portal publishes an English text for a law, it is beside it as `<number>.en.md` (an official translation; the Arabic prevails).
 
 ## Questions as git commands
 
